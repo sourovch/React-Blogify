@@ -18,7 +18,7 @@ function EditBlog() {
   const { id: blogId } = useParams();
   const { userId } = useAuth();
   const authorId = location.state?.authorId;
-  const from = location.state?.from || "/";
+  const from = location.state?.from || "/me";
   const { profile } = useProfile();
   const navigate = useNavigate();
 
