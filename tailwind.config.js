@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js, jsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       container: {
@@ -12,5 +12,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  // eslint-disable-next-line no-undef
+  plugins: [require('@tailwindcss/typography')],
 };

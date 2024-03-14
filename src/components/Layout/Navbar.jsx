@@ -1,0 +1,50 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import lwsLogo from "../../assets/logo.svg";
+import usePortal from "../../hooks/usePortal";
+import Search from "../Search";
+import NavItems from "./NavItems";
+
+function Navbar() {
+  const [showSearchModal, setShowSearchModal] = useState();
+  const portal = usePortal();
+
+  function openSearchModal() {
+    setShowSearchModal(true);
+  }
+
+  function closeSearchModal() {
+    setShowSearchModal(false);
+  }
+
+  useEffect(() => {
+    if (showSearchModal) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "";
+    }
+  }, [showSearchModal]);
+
+  return (
+    <>
+      <header>
+        <nav className="container">
+          {/* <!-- Logo --> */}
+          <div>
+            <Link href="/">
+              <img className="w-32" src={lwsLogo} alt="lws" />
+            </Link>
+          </div>
+          <div>
+            <ul className="flex items-center space-x-5">
+              <NavItems onSearchClick={openSearchModal} />
+            </ul>
+          </div>
+        </nav>
+      </header>
+      {showSearchModal && portal(<Search onCloseClick={closeSearchModal} />)}
+    </>
+  );
+}
+
+export default Navbar;
