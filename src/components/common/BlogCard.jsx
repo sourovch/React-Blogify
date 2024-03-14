@@ -13,7 +13,7 @@ function BlogCard({ blog }) {
       <Link to={`/blog/${id}`}>
         <img
           data-load
-          className="blog-thumb w-96"
+          className="blog-thumb w-96 min-w-48 md:min-w-96"
           src={`${import.meta.env.VITE_API_ENDPOINT}/uploads/blog/${thumbnail}`}
           alt={title}
         />
