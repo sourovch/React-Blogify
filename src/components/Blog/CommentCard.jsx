@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
-import { motion as m } from "framer-motion";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import threeDot from "../../assets/icons/3dots.svg";
-import useAuth from "../../hooks/useAuth";
+import { motion as m } from "framer-motion";
 import { useState } from "react";
-import Spinner from "../common/Spinner";
-import deleteIcon from "../../assets/icons/delete.svg";
+import { Link } from "react-router-dom";
 import api from "../../api";
-import modalManager from "../../store/ModalStore";
+import threeDot from "../../assets/icons/3dots.svg";
+import deleteIcon from "../../assets/icons/delete.svg";
 import { BLOG_ACTION_VARIANTS } from "../../framerMotion/variants";
+import useAuth from "../../hooks/useAuth";
+import modalManager from "../../store/ModalStore";
+import Spinner from "../common/Spinner";
 
 function CommentCard({ comment, blogId, authorId: blogAuthorId }) {
   const { userId } = useAuth();
@@ -40,7 +40,7 @@ function CommentCard({ comment, blogId, authorId: blogAuthorId }) {
             {author?.firstName} {author.lastName}
           </h5>
         </Link>
-        <p className="text-slate-300 mr-5">{comment?.content}</p>
+        <p className="mr-5 text-slate-300">{comment?.content}</p>
         {userId === author?.id && (
           <Actions
             commentId={comment?.id}
@@ -89,7 +89,7 @@ function Actions({ commentId, blogId, blogAuthorId }) {
   });
 
   return (
-    <div className="absolute right-0 top-0 bottom-0 flex">
+    <div className="absolute top-0 bottom-0 right-0 flex">
       <button onClick={() => setMenuOpen((mo) => !mo)}>
         <img src={threeDot} alt="3dots of Action" />
       </button>
@@ -102,7 +102,7 @@ function Actions({ commentId, blogId, blogAuthorId }) {
           className="action-modal-container"
         >
           <button
-            className="action-menu-item hover:text-red-500 relative"
+            className="relative action-menu-item hover:text-red-500"
             onClick={() => {
               mutate({ commentId, blogId });
             }}

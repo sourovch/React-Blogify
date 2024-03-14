@@ -1,7 +1,7 @@
+import { motion as m } from "framer-motion";
 import { BUTTON_VARIANTS } from "../../framerMotion/variants";
 import ImageInput from "../Form/ImageInput";
 import Spinner from "./Spinner";
-import { motion as m } from "framer-motion";
 
 function BlogForm({ formManager, onSubmit, isLoading }) {
   const {

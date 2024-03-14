@@ -16,7 +16,7 @@ function Button({ label, className, isLoading, ...rest }) {
       {isLoading ? (
         <div
           role="status"
-          className="flex flex-col items-center justify-center max-h-5 w-full"
+          className="flex flex-col items-center justify-center w-full max-h-5"
         >
           <svg
             aria-hidden="true"

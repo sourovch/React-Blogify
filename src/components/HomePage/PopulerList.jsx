@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import SideCard from "./SideCard";
 import api from "../../api";
+import SideCard from "./SideCard";
 
 async function getPopular() {
   const res = await api.get("/blogs/popular");

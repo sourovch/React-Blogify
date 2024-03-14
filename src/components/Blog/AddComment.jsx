@@ -2,10 +2,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion as m } from "framer-motion";
 import { useState } from "react";
 import api from "../../api";
+import { BUTTON_VARIANTS } from "../../framerMotion/variants";
+import useAuth from "../../hooks/useAuth";
 import useProfile from "../../hooks/useProfile";
 import Spinner from "../common/Spinner";
-import useAuth from "../../hooks/useAuth";
-import { BUTTON_VARIANTS } from "../../framerMotion/variants";
 
 function AddComment({ blogId, authorId }) {
   const { profile } = useProfile();

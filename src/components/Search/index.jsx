@@ -3,9 +3,9 @@ import { motion as m } from "framer-motion";
 import { useState } from "react";
 import api from "../../api";
 import closeIcon from "../../assets/icons/close.svg";
+import { OVERLAY_VARIANTS, SEARCH_VARIANTS } from "../../framerMotion/variants";
 import SearchBox from "./SearchBox";
 import SearchResults from "./SearchResults";
-import { OVERLAY_VARIANTS, SEARCH_VARIANTS } from "../../framerMotion/variants";
 
 async function reqSearch({ queryKey }) {
   const res = await api.get(`/search?q=${queryKey[1].q}`);

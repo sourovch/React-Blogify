@@ -76,7 +76,7 @@ function NavItems({ onSearchClick }) {
                   <div className="w-full h-full overflow-hidden rounded-full">
                     <img
                       data-load
-                      className="w-full h-full object-cover"
+                      className="object-cover w-full h-full"
                       src={`${
                         import.meta.env.VITE_API_ENDPOINT
                       }/uploads/avatar/${profile.avatar}`}

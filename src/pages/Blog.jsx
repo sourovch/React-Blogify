@@ -1,21 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams, useLocation } from "react-router-dom";
 import { motion as m } from "framer-motion";
+import { Link, useLocation, useParams } from "react-router-dom";
 import api from "../api";
 import AddComment from "../components/Blog/AddComment";
 import CommentCard from "../components/Blog/CommentCard";
 import FloatingActions from "../components/Blog/FloatingActions";
-import useAuth from "../hooks/useAuth";
-import useDocumentTitle from "../hooks/useDocumentTitle";
-import { getDate } from "../utils/formateDate";
+import BlogSkl from "../components/Skletons/BlogSkl";
+import ErrorPage from "../components/common/ErrorElm";
 import {
   BLOG_IMAGE_VARIANT,
   BLOG_TAGS_VARIANT,
   BLOG_TAG_CONT_VARIANT,
   PAGE_TRANSITION_VARIANT,
 } from "../framerMotion/variants";
-import ErrorPage from "../components/common/ErrorElm";
-import BlogSkl from "../components/Skletons/BlogSkl";
+import useAuth from "../hooks/useAuth";
+import useDocumentTitle from "../hooks/useDocumentTitle";
+import { getDate } from "../utils/formateDate";
 
 async function getBlog({ queryKey }) {
   const res = await api.get(`/blogs/${queryKey[1]}`);

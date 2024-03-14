@@ -6,9 +6,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import api from "../api";
 import Button from "../components/Form/Button";
 import InputFeald from "../components/Form/InputFeald";
+import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import AuthStore from "../store/AuthStore";
-import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
 
 const initialValue = { email: "", password: "" };
 

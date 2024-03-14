@@ -4,14 +4,14 @@ import lwsLogo from "../../assets/logo.svg";
 function Footer() {
   return (
     <footer className="my-6 md:my-8 bg-[#030317]">
-      <div className="container mx-auto flex items-center justify-between">
+      <div className="container flex items-center justify-between mx-auto">
         <Link to="/">
           <img className="w-28" src={lwsLogo} alt="lws" />
         </Link>
         <ul className="flex items-center space-x-5">
           <li className="text-center">
             <a
-              className="text-white/50 hover:text-white transition-all duration-200"
+              className="transition-all duration-200 text-white/50 hover:text-white"
               href="#"
             >
               <svg
@@ -29,7 +29,7 @@ function Footer() {
           </li>
           <li className="text-center">
             <a
-              className="text-white/50 hover:text-white transition-all duration-200"
+              className="transition-all duration-200 text-white/50 hover:text-white"
               href="#"
             >
               <svg
@@ -58,7 +58,7 @@ function Footer() {
           </li>
           <li className="text-center">
             <a
-              className="text-white/50 hover:text-white transition-all duration-200"
+              className="transition-all duration-200 text-white/50 hover:text-white"
               href="#"
             >
               <svg
@@ -78,7 +78,7 @@ function Footer() {
           </li>
           <li className="text-center">
             <a
-              className="text-white/50 hover:text-white transition-all duration-200"
+              className="transition-all duration-200 text-white/50 hover:text-white"
               href="#"
             >
               <svg
@@ -97,7 +97,7 @@ function Footer() {
           </li>
           <li className="text-center">
             <a
-              className="text-white/50 hover:text-white transition-all duration-200"
+              className="transition-all duration-200 text-white/50 hover:text-white"
               href="#"
             >
               <svg

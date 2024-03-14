@@ -1,17 +1,17 @@
-import likeIcon from "../../assets/icons/like.svg";
-import likeIconFill from "../../assets/icons/like-filled.svg";
-import favIcon from "../../assets/icons/heart.svg";
-import favIconFill from "../../assets/icons/heart-filled.svg";
-import commentIcon from "../../assets/icons/comment.svg";
-import useProfile from "../../hooks/useProfile";
-import api from "../../api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import modalManager from "../../store/ModalStore";
 import { motion as m } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import api from "../../api";
+import commentIcon from "../../assets/icons/comment.svg";
+import favIconFill from "../../assets/icons/heart-filled.svg";
+import favIcon from "../../assets/icons/heart.svg";
+import likeIconFill from "../../assets/icons/like-filled.svg";
+import likeIcon from "../../assets/icons/like.svg";
 import { FLOATING_BLOG_ACTION } from "../../framerMotion/variants";
+import useAuth from "../../hooks/useAuth";
+import useProfile from "../../hooks/useProfile";
+import modalManager from "../../store/ModalStore";
 
 async function reqLike(blogId) {
   return api.post(`/blogs/${blogId}/like`);

@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import editIcon from "../../assets/icons/edit.svg";
-import checkIcon from "../../assets/icons/check.svg";
 import { motion as m } from "framer-motion";
-import crossIcon from "../../assets/icons/cross.svg";
+import { useState } from "react";
 import api from "../../api";
-import Spinner from "../common/Spinner";
+import checkIcon from "../../assets/icons/check.svg";
+import crossIcon from "../../assets/icons/cross.svg";
+import editIcon from "../../assets/icons/edit.svg";
 import { BUTTON_VARIANTS } from "../../framerMotion/variants";
+import Spinner from "../common/Spinner";
 
 async function setBio(data) {
   return api.patch("/profile", data);

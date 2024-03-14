@@ -1,10 +1,10 @@
-import { useRef } from "react";
-import { motion as m } from "framer-motion";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import editIcon from "../../assets/icons/edit.svg";
+import { motion as m } from "framer-motion";
+import { useRef } from "react";
 import api from "../../api";
-import Spinner from "../common/Spinner";
+import editIcon from "../../assets/icons/edit.svg";
 import { BUTTON_VARIANTS } from "../../framerMotion/variants";
+import Spinner from "../common/Spinner";
 
 async function setAvatar(data) {
   return api.post("/profile/avatar", data);

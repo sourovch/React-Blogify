@@ -1,14 +1,14 @@
-import { useParams } from "react-router-dom";
 import { motion as m } from "framer-motion";
+import { useParams } from "react-router-dom";
+import ProfileSkl from "../components/Skletons/ProfileSkl";
 import BlogCard from "../components/common/BlogCard";
 import NothingIndicator from "../components/common/NothingIndicator";
 import ProfileBio from "../components/profile/ProfileBio";
 import ProfileImage from "../components/profile/ProfileImage";
+import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
 import useAuth from "../hooks/useAuth";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import useProfile from "../hooks/useProfile";
-import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
-import ProfileSkl from "../components/Skletons/ProfileSkl";
 
 function Profile() {
   const { id } = useParams();

@@ -1,12 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import { motion as m } from "framer-motion";
-import InputFeald from "../components/Form/InputFeald";
-import Button from "../components/Form/Button";
-import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
+import { motion as m } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import Button from "../components/Form/Button";
+import InputFeald from "../components/Form/InputFeald";
 import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const initialValue = { firstName: "", lastName: "", email: "", password: "" };
 
