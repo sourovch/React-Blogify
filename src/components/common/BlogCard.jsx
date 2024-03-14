@@ -10,12 +10,14 @@ function BlogCard({ blog }) {
 
   return (
     <div className="blog-card">
-      <img
-        data-load
-        className="blog-thumb w-96"
-        src={`${import.meta.env.VITE_API_ENDPOINT}/uploads/blog/${thumbnail}`}
-        alt={title}
-      />
+      <Link to={`/blog/${id}`}>
+        <img
+          data-load
+          className="blog-thumb w-96"
+          src={`${import.meta.env.VITE_API_ENDPOINT}/uploads/blog/${thumbnail}`}
+          alt={title}
+        />
+      </Link>
       <div className="relative w-full mt-2">
         <Link to={`/blog/${id}`}>
           <h3 className="w-5/6 text-xl break-words text-slate-300 lg:text-2xl">
