@@ -1,4 +1,5 @@
 import BlogForm from "../components/common/BlogForm";
+import { motion as m } from "framer-motion";
 import useAuth from "../hooks/useAuth";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import api from "../api";
 import useProfile from "../hooks/useProfile";
+import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
 
 async function reqEditBlog({ id, data }) {
   return api.patch(`/blogs/${id}`, data);
@@ -71,7 +73,12 @@ function EditBlog() {
 
   useDocumentTitle("Edit Blog | React Blogify");
   return (
-    <main>
+    <m.main
+      variants={PAGE_TRANSITION_VARIANT}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+    >
       <section>
         <div className="container">
           {isError && (
@@ -88,7 +95,7 @@ function EditBlog() {
           />
         </div>
       </section>
-    </main>
+    </m.main>
   );
 }
 

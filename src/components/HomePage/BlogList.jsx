@@ -5,7 +5,7 @@ import BlogCard from "../common/BlogCard";
 import ErrorPage from "../common/ErrorElm";
 import Spinner from "../common/Spinner";
 
-const LIMIT = 5;
+const LIMIT = 10;
 
 async function getBlogs({ pageParam = 1 }) {
   const res = await api.get(`/blogs?page=${pageParam}&limit=${LIMIT}`);

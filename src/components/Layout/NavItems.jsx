@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import searchIcon from "../../assets/icons/search.svg";
 import useAuth from "../../hooks/useAuth";
 import useProfile from "../../hooks/useProfile";
+import NavUserInfoSkl from "../Skletons/NavUserInfoskl";
 
 function NavItems({ onSearchClick }) {
   const { authToken } = useAuth();
-  const { profile } = useProfile();
+  const { profile, isLoading, isPending, isError } = useProfile();
 
   return (
     <>
@@ -38,7 +39,7 @@ function NavItems({ onSearchClick }) {
       </Link>
       <li>
         <button
-        onClick={onSearchClick}
+          onClick={onSearchClick}
           className="flex items-center gap-2 cursor-pointer"
         >
           <img src={searchIcon} alt="Search" />
@@ -59,35 +60,39 @@ function NavItems({ onSearchClick }) {
           <Link
             to="/logout"
             className="transition-all duration-200 text-white/50 hover:text-white"
-            state={{ from: "/" }}
           >
             Log Out
           </Link>
         </li>
       )}
       {authToken && (
-        <li className="flex items-center">
-          <div className="text-white bg-orange-600 avater-img">
-            {profile?.avatar ? (
-              <div className="w-full h-full overflow-hidden rounded-full">
-                <img
-                  className="w-full h-full object-cover"
-                  src={`${import.meta.env.VITE_API_ENDPOINT}/uploads/avatar/${
-                    profile.avatar
-                  }`}
-                  alt=""
-                />
+        <>
+          {isLoading || isPending || isError ? (
+            <NavUserInfoSkl />
+          ) : (
+            <li className="flex items-center">
+              <div className="text-white bg-orange-600 avater-img">
+                {profile?.avatar ? (
+                  <div className="w-full h-full overflow-hidden rounded-full">
+                    <img
+                      data-load
+                      className="w-full h-full object-cover"
+                      src={`${
+                        import.meta.env.VITE_API_ENDPOINT
+                      }/uploads/avatar/${profile.avatar}`}
+                      alt=""
+                    />
+                  </div>
+                ) : (
+                  <span className="">{profile?.firstName?.slice(0, 1)}</span>
+                )}
               </div>
-            ) : (
-              <span className="">{profile?.firstName?.slice(0, 1) || 0}</span>
-            )}
-          </div>
-          <Link to="/me">
-            <span className="ml-2 text-white capitalize">{`${
-              profile?.firstName || "Name"
-            } ${profile?.lastName || "Name"}`}</span>
-          </Link>
-        </li>
+              <Link to="/me">
+                <span className="ml-2 text-white capitalize">{`${profile?.firstName} ${profile?.lastName}`}</span>
+              </Link>
+            </li>
+          )}{" "}
+        </>
       )}
     </>
   );

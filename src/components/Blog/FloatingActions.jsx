@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import modalManager from "../../store/ModalStore";
+import { motion as m } from "framer-motion";
+import { FLOATING_BLOG_ACTION } from "../../framerMotion/variants";
 
 async function reqLike(blogId) {
   return api.post(`/blogs/${blogId}/like`);
@@ -107,7 +109,12 @@ function FloatingActions({
   }
 
   return (
-    <div className="floating-action">
+    <m.div
+      variants={FLOATING_BLOG_ACTION}
+      initial="initial"
+      animate="animate"
+      className="floating-action"
+    >
       <ul className="floating-action-menus">
         <li role="button" onClick={handleLike}>
           {isLiked ? (
@@ -134,7 +141,7 @@ function FloatingActions({
           </li>
         </a>
       </ul>
-    </div>
+    </m.div>
   );
 }
 

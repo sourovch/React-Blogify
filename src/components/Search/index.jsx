@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import { motion as m } from "framer-motion";
 import { useState } from "react";
 import api from "../../api";
 import closeIcon from "../../assets/icons/close.svg";
 import SearchBox from "./SearchBox";
 import SearchResults from "./SearchResults";
+import { OVERLAY_VARIANTS, SEARCH_VARIANTS } from "../../framerMotion/variants";
 
 async function reqSearch({ queryKey }) {
   const res = await api.get(`/search?q=${queryKey[1].q}`);
@@ -20,18 +22,35 @@ function Search({ onCloseClick }) {
   });
 
   return (
-    <section className="absolute top-0 left-0 z-50 grid w-full h-full place-items-center bg-slate-800/50 backdrop-blur-sm">
-      <div className="relative w-6/12 p-4 mx-auto border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10">
+    <m.section
+      variants={OVERLAY_VARIANTS}
+      initial="initial"
+      animate="animate"
+      exit="initial"
+      className="fixed top-0 left-0 z-50 grid w-full h-full place-items-center bg-slate-800/50 backdrop-blur-sm"
+    >
+      <m.div
+        variants={SEARCH_VARIANTS}
+        initial="initial"
+        animate="animate"
+        exit="initial"
+        className="relative w-6/12 p-4 mx-auto border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10"
+      >
         <div>
           <h3 className="pl-2 my-2 text-xl font-bold text-slate-400">
-            Search for Your Desire Blogs
+            {/* Search for Your Desire Blogs */}
           </h3>
           <SearchBox
             onInputChange={(inputValue) => setSearchText(inputValue)}
             isLoading={isLoading}
           />
         </div>
-        <SearchResults searchResults={data} error={error} isError={isError} onCloseClick={onCloseClick}/>
+        <SearchResults
+          searchResults={data}
+          error={error}
+          isError={isError}
+          onCloseClick={onCloseClick}
+        />
         <button onClick={onCloseClick}>
           <img
             src={closeIcon}
@@ -39,8 +58,8 @@ function Search({ onCloseClick }) {
             className="absolute w-8 h-8 cursor-pointer right-2 top-2"
           />
         </button>
-      </div>
-    </section>
+      </m.div>
+    </m.section>
   );
 }
 

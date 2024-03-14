@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams, useLocation } from "react-router-dom";
+import { motion as m } from "framer-motion";
 import api from "../api";
 import AddComment from "../components/Blog/AddComment";
 import CommentCard from "../components/Blog/CommentCard";
@@ -7,6 +8,14 @@ import FloatingActions from "../components/Blog/FloatingActions";
 import useAuth from "../hooks/useAuth";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { getDate } from "../utils/formateDate";
+import {
+  BLOG_IMAGE_VARIANT,
+  BLOG_TAGS_VARIANT,
+  BLOG_TAG_CONT_VARIANT,
+  PAGE_TRANSITION_VARIANT,
+} from "../framerMotion/variants";
+import ErrorPage from "../components/common/ErrorElm";
+import BlogSkl from "../components/Skletons/BlogSkl";
 
 async function getBlog({ queryKey }) {
   const res = await api.get(`/blogs/${queryKey[1]}`);
@@ -18,6 +27,7 @@ function Blog() {
   const {
     data: blog,
     isLoading,
+    isPending,
     isError,
     error,
   } = useQuery({
@@ -32,21 +42,19 @@ function Blog() {
     `${isLoading ? "loading" : blog?.title || "post title"} | React Blogify`
   );
 
-  if (isError)
-    return (
-      <div className="container">
-        {error?.response?.message ||
-          error?.message ||
-          "There was an Unexpected error"}
-      </div>
-    );
-  if (isLoading) return <div className="container">Loading..</div>;
+  if (isError) return <ErrorPage customErr={error} />;
+  if (isLoading || isPending) return <BlogSkl />;
 
   const author = blog?.author;
 
   return (
     <>
-      <main>
+      <m.main
+        variants={PAGE_TRANSITION_VARIANT}
+        initial="hidden"
+        animate="show"
+        exit="hidden"
+      >
         <section>
           <div className="container py-8 text-center">
             <h1 className="text-3xl font-bold md:text-5xl">{blog?.title}</h1>
@@ -57,6 +65,7 @@ function Blog() {
                     {author?.avatar ? (
                       <div className="w-full h-full overflow-hidden rounded-full">
                         <img
+                          data-load
                           className="object-cover w-full h-full"
                           src={`${
                             import.meta.env.VITE_API_ENDPOINT
@@ -80,20 +89,33 @@ function Blog() {
                 {blog?.likes?.length} Likes
               </span>
             </div>
-            <img
+            <m.img
+              data-load
+              variants={BLOG_IMAGE_VARIANT}
+              initial="initial"
+              animate="animate"
               className="object-cover w-full mx-auto md:w-8/12 h-80 md:h-96"
               src={`${import.meta.env.VITE_API_ENDPOINT}/uploads/blog/${
                 blog?.thumbnail
               }`}
               alt=""
             />
-            <ul className="tags">
+            <m.ul
+              variants={BLOG_TAG_CONT_VARIANT}
+              initial="initial"
+              animate="animate"
+              className="tags"
+            >
               {blog?.tags?.split(",").map((tag, i) => (
-                <li key={i} className="capitalize">
+                <m.li
+                  variants={BLOG_TAGS_VARIANT}
+                  key={i}
+                  className="capitalize"
+                >
                   {tag.trim()}
-                </li>
+                </m.li>
               ))}
-            </ul>
+            </m.ul>
             <div
               dangerouslySetInnerHTML={{ __html: blog?.content }}
               className="mx-auto w-full md:w-10/12 text-slate-300 text-base md:text-lg leading-8 py-2 !text-left prose-2xl"
@@ -133,7 +155,7 @@ function Blog() {
             ))}
           </div>
         </section>
-      </main>
+      </m.main>
       <FloatingActions
         commentCount={blog?.comments?.length || 0}
         likes={blog?.likes}

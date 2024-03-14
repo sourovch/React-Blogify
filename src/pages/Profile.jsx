@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { motion as m } from "framer-motion";
 import BlogCard from "../components/common/BlogCard";
 import NothingIndicator from "../components/common/NothingIndicator";
 import ProfileBio from "../components/profile/ProfileBio";
@@ -6,7 +7,8 @@ import ProfileImage from "../components/profile/ProfileImage";
 import useAuth from "../hooks/useAuth";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import useProfile from "../hooks/useProfile";
-import Spinner from "../components/common/Spinner";
+import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
+import ProfileSkl from "../components/Skletons/ProfileSkl";
 
 function Profile() {
   const { id } = useParams();
@@ -26,22 +28,7 @@ function Profile() {
         </div>
       </div>
     );
-  else if (isLoading || isPending)
-    content = (
-      <div className="min-h-[60vh] grid place-content-center">
-        {isPending && !isLoading ? (
-          <Spinner
-            overlay="na"
-            loadingInfo={"Check Your Internet connection"}
-            showLoadingInfo
-          />
-        ) : (
-          isLoading && (
-            <Spinner loadingInfo={"Loading Profile Data"} showLoadingInfo />
-          )
-        )}
-      </div>
-    );
+  else if (isLoading || isPending) content = <ProfileSkl />;
   else
     content = (
       <>
@@ -82,9 +69,15 @@ function Profile() {
 
   useDocumentTitle(`${fullName || "name"} | React Blogify`);
   return (
-    <main className="mx-auto max-w-[1020px] py-8">
+    <m.main
+      variants={PAGE_TRANSITION_VARIANT}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+      className="mx-auto max-w-[1020px] py-8"
+    >
       <div className="container">{content}</div>
-    </main>
+    </m.main>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion as m } from "framer-motion";
 import threeDot from "../../assets/icons/3dots.svg";
 import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/delete.svg";
@@ -8,6 +9,7 @@ import api from "../../api";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "./Spinner";
 import modalManager from "../../store/ModalStore";
+import { BLOG_ACTION_VARIANTS } from "../../framerMotion/variants";
 
 async function reqDeleteBlog(id) {
   return api.delete(`/blogs/${id}`);
@@ -65,7 +67,13 @@ function BlogActions({ id, authorId }) {
       </button>
 
       {menuOpen && (
-        <div className="action-modal-container">
+        <m.div
+          variants={BLOG_ACTION_VARIANTS}
+          initial="initial"
+          animate="animate"
+          style={{ originX: 1, originY: 0 }}
+          className="action-modal-container"
+        >
           <Link
             to={`/edit/${id}`}
             state={{ authorId, from: location.pathname }}
@@ -91,7 +99,7 @@ function BlogActions({ id, authorId }) {
               </>
             )}
           </button>
-        </div>
+        </m.div>
       )}
     </div>
   );

@@ -24,6 +24,7 @@ function Login() {
   const {
     mutate: signIn,
     error: signInError,
+    isPending,
     reset,
   } = useMutation({
     mutationFn: signInReq,
@@ -94,7 +95,7 @@ function Login() {
             />
             <CheckBox />
             <div className="mb-6">
-              <Button label="Login" type="submit" />
+              <Button isLoading={isPending} label="Login" type="submit" />
             </div>
             <p className="text-center">
               Don&apos;t have an account?{" "}

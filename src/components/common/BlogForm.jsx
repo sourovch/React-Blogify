@@ -1,5 +1,7 @@
+import { BUTTON_VARIANTS } from "../../framerMotion/variants";
 import ImageInput from "../Form/ImageInput";
 import Spinner from "./Spinner";
+import { motion as m } from "framer-motion";
 
 function BlogForm({ formManager, onSubmit, isLoading }) {
   const {
@@ -63,7 +65,10 @@ function BlogForm({ formManager, onSubmit, isLoading }) {
         )}
       </div>
 
-      <button
+      <m.button
+        variants={BUTTON_VARIANTS}
+        initial="initial"
+        whileTap="tap"
         disabled={isLoading}
         className="relative px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 hover:bg-indigo-700"
       >
@@ -76,7 +81,7 @@ function BlogForm({ formManager, onSubmit, isLoading }) {
         ) : (
           "Submit"
         )}
-      </button>
+      </m.button>
     </form>
   );
 }

@@ -3,9 +3,22 @@
 @tailwind utilities;
 
 .skeleton {
-  @apply bg-gray-600 opacity-80 animate-pulse;
+  @apply bg-gray-700 opacity-80 animate-pulse;
 }
 
+img[data-load] {
+  @apply text-[0px];
+  animation: palse 1s linear infinite alternate;
+}
+
+@keyframes palse {
+  0% {
+    background-color: hsl(217, 19%, 20%);
+  }
+  100% {
+    background-color: hsl(217, 19%, 27%);
+  }
+}
 @layer components {
   * {
     font-family: "Montserrat", sans-serif;
@@ -13,14 +26,14 @@
   }
 
   ::-webkit-scrollbar {
-    width: 0px;
+    width: 10px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: #888;
-    border-radius: 0px;
+    border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
@@ -91,7 +104,7 @@
   }
 
   .tags li {
-    @apply p-2 px-4 text-sm transition-all rounded-md cursor-pointer bg-slate-700 hover:bg-slate-800 hover:ring hover:ring-slate-500;
+    @apply p-2 px-4 text-sm rounded-md cursor-pointer bg-slate-700 hover:bg-slate-800 hover:ring hover:ring-slate-500;
   }
 
   /* createBlog */

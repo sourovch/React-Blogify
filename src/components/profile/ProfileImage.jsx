@@ -1,8 +1,10 @@
 import { useRef } from "react";
+import { motion as m } from "framer-motion";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import editIcon from "../../assets/icons/edit.svg";
 import api from "../../api";
 import Spinner from "../common/Spinner";
+import { BUTTON_VARIANTS } from "../../framerMotion/variants";
 
 async function setAvatar(data) {
   return api.post("/profile/avatar", data);
@@ -41,6 +43,7 @@ function ProfileImage({ userId, avatar, name, edit }) {
         {avatar ? (
           <div className="w-full h-full overflow-hidden rounded-full">
             <img
+              data-load
               className="object-cover w-full h-full"
               src={`${
                 import.meta.env.VITE_API_ENDPOINT
@@ -64,12 +67,15 @@ function ProfileImage({ userId, avatar, name, edit }) {
               onChange={handleImgChange}
               ref={imageInputRef}
             />
-            <button
+            <m.button
+              variants={BUTTON_VARIANTS}
+              initial="initial"
+              whileTap="tap"
               onClick={handleImgInpClick}
               className="absolute bottom-0 right-0 grid rounded-full place-items-center h-7 w-7 bg-slate-700 hover:bg-slate-700/80"
             >
               <img src={editIcon} alt="Edit" />
-            </button>
+            </m.button>
           </>
         )}
       </div>

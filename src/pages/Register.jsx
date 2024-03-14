@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
+import { motion as m } from "framer-motion";
 import InputFeald from "../components/Form/InputFeald";
 import Button from "../components/Form/Button";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import api from "../api";
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
 
 const initialValue = { firstName: "", lastName: "", email: "", password: "" };
 
@@ -17,6 +19,7 @@ function Register() {
   const {
     error: signUpError,
     mutate: signUp,
+    isPending,
     reset,
   } = useMutation({
     mutationFn: sendRegReq,
@@ -36,7 +39,12 @@ function Register() {
 
   useDocumentTitle("Register | React Blogify");
   return (
-    <main>
+    <m.main
+      variants={PAGE_TRANSITION_VARIANT}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+    >
       <section className="container">
         <div className="w-full md:w-1/2 mx-auto bg-[#030317] p-8 rounded-md mt-12">
           <h2 className="mb-6 text-2xl font-bold">Register</h2>
@@ -109,7 +117,11 @@ function Register() {
               error={errors.password?.message}
             />
             <div className="mb-6">
-              <Button type="submit" label="Create Account" />
+              <Button
+                isLoading={isPending}
+                type="submit"
+                label="Create Account"
+              />
             </div>
             <p className="text-center">
               Already have account?{" "}
@@ -120,7 +132,7 @@ function Register() {
           </form>
         </div>
       </section>
-    </main>
+    </m.main>
   );
 }
 

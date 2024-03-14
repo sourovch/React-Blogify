@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import editIcon from "../../assets/icons/edit.svg";
 import checkIcon from "../../assets/icons/check.svg";
+import { motion as m } from "framer-motion";
 import crossIcon from "../../assets/icons/cross.svg";
 import api from "../../api";
 import Spinner from "../common/Spinner";
+import { BUTTON_VARIANTS } from "../../framerMotion/variants";
 
 async function setBio(data) {
   return api.patch("/profile", data);
@@ -56,7 +58,10 @@ function ProfileBio({ bio, edit, userId }) {
 
       {showTextArea && (
         <div className="flex flex-col items-center justify-center gap-2">
-          <button
+          <m.button
+            variants={BUTTON_VARIANTS}
+            initial="initial"
+            whileTap="tap"
             className="relative rounded-full flex-center h-7 w-7"
             onClick={handleBioChange}
             disabled={isPending}
@@ -65,8 +70,11 @@ function ProfileBio({ bio, edit, userId }) {
               <div className="absolute inset-0 z-10 w-full h-full bg-[#030317]/60"></div>
             )}
             <img src={checkIcon} alt="Check" />
-          </button>
-          <button
+          </m.button>
+          <m.button
+            variants={BUTTON_VARIANTS}
+            initial="initial"
+            whileTap="tap"
             className="relative rounded-full flex-center h-7 w-7"
             onClick={() => setShowTextArea(false)}
             disabled={isPending}
@@ -75,17 +83,20 @@ function ProfileBio({ bio, edit, userId }) {
               <div className="absolute inset-0 z-10 w-full h-full bg-[#030317]/60"></div>
             )}
             <img src={crossIcon} alt="Cross" className="p-[6px]" />
-          </button>
+          </m.button>
         </div>
       )}
 
       {edit && !showTextArea && (
-        <button
+        <m.button
+          variants={BUTTON_VARIANTS}
+          initial="initial"
+          whileTap="tap"
           className="rounded-full flex-center h-7 w-7"
           onClick={() => setShowTextArea(true)}
         >
           <img src={editIcon} alt="Edit" />
-        </button>
+        </m.button>
       )}
     </div>
   );

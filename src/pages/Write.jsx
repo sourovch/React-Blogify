@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
+import { motion as m } from "framer-motion";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import BlogForm from "../components/common/BlogForm";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import api from "../api";
 import useAuth from "../hooks/useAuth";
+import { PAGE_TRANSITION_VARIANT } from "../framerMotion/variants";
 
 const initialValue = {
   title: "",
@@ -48,7 +50,12 @@ function Write() {
 
   useDocumentTitle("New Blog | React Blogify");
   return (
-    <main>
+    <m.main
+      variants={PAGE_TRANSITION_VARIANT}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+    >
       <section>
         <div className="container">
           {isError && (
@@ -65,7 +72,7 @@ function Write() {
           />
         </div>
       </section>
-    </main>
+    </m.main>
   );
 }
 

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import lwsLogo from "../../assets/logo.svg";
 import usePortal from "../../hooks/usePortal";
@@ -17,14 +18,6 @@ function Navbar() {
     setShowSearchModal(false);
   }
 
-  useEffect(() => {
-    if (showSearchModal) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "";
-    }
-  }, [showSearchModal]);
-
   return (
     <>
       <header>
@@ -42,7 +35,13 @@ function Navbar() {
           </div>
         </nav>
       </header>
-      {showSearchModal && portal(<Search onCloseClick={closeSearchModal} />)}
+      {portal(
+        <AnimatePresence>
+          {showSearchModal && (
+            <Search onCloseClick={closeSearchModal} key={"search"} />
+          )}
+        </AnimatePresence>
+      )}
     </>
   );
 }

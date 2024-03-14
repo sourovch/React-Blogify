@@ -1,4 +1,5 @@
 import { useRouteError } from "react-router-dom";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 export default function ErrorPage({ customErr }) {
   let error;
@@ -6,6 +7,7 @@ export default function ErrorPage({ customErr }) {
   if (customErr) error = customErr;
   else error = err;
 
+  useDocumentTitle(`${error?.message || "There was an error"}`);
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen max-h-full space-y-10">
       <h1 className="text-3xl">Oops!</h1>

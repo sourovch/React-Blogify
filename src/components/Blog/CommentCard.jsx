@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion as m } from "framer-motion";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import threeDot from "../../assets/icons/3dots.svg";
 import useAuth from "../../hooks/useAuth";
@@ -7,6 +8,7 @@ import Spinner from "../common/Spinner";
 import deleteIcon from "../../assets/icons/delete.svg";
 import api from "../../api";
 import modalManager from "../../store/ModalStore";
+import { BLOG_ACTION_VARIANTS } from "../../framerMotion/variants";
 
 function CommentCard({ comment, blogId, authorId: blogAuthorId }) {
   const { userId } = useAuth();
@@ -19,6 +21,7 @@ function CommentCard({ comment, blogId, authorId: blogAuthorId }) {
           {author?.avatar ? (
             <div className="w-full h-full overflow-hidden rounded-full">
               <img
+                data-load
                 className="object-cover w-full h-full"
                 src={`${import.meta.env.VITE_API_ENDPOINT}/uploads/avatar/${
                   author.avatar
@@ -91,7 +94,13 @@ function Actions({ commentId, blogId, blogAuthorId }) {
         <img src={threeDot} alt="3dots of Action" />
       </button>
       {menuOpen && (
-        <div className="action-modal-container">
+        <m.div
+          variants={BLOG_ACTION_VARIANTS}
+          initial="initial"
+          animate="animate"
+          style={{ originX: 1, originY: 0 }}
+          className="action-modal-container"
+        >
           <button
             className="action-menu-item hover:text-red-500 relative"
             onClick={() => {
@@ -111,7 +120,7 @@ function Actions({ commentId, blogId, blogAuthorId }) {
               </>
             )}
           </button>
-        </div>
+        </m.div>
       )}
     </div>
   );

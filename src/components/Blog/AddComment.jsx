@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { motion as m } from "framer-motion";
 import { useState } from "react";
 import api from "../../api";
 import useProfile from "../../hooks/useProfile";
 import Spinner from "../common/Spinner";
 import useAuth from "../../hooks/useAuth";
+import { BUTTON_VARIANTS } from "../../framerMotion/variants";
 
 function AddComment({ blogId, authorId }) {
   const { profile } = useProfile();
@@ -58,8 +60,10 @@ function CommentTextArea({ blogId, authorId }) {
   });
 
   function handleCommentSubmit() {
-    setText("");
-    mutate({ comment: text, blogId });
+    if (text.length > 0) {
+      setText("");
+      mutate({ comment: text, blogId });
+    }
   }
 
   return (
@@ -78,12 +82,15 @@ function CommentTextArea({ blogId, authorId }) {
         </div>
       )}
       <div className="flex justify-end mt-4">
-        <button
+        <m.button
+          variants={BUTTON_VARIANTS}
+          initial="initial"
+          whileTap="tap"
           className="relative px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 hover:bg-indigo-700"
           onClick={handleCommentSubmit}
         >
           {isPending ? <Spinner overlay={false} size={"small"} /> : "Comment"}
-        </button>
+        </m.button>
       </div>
     </div>
   );

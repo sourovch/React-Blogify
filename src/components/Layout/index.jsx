@@ -9,6 +9,7 @@ import Modal from "./Modal";
 import { queryClient } from "../../api/queryClient";
 import ProfileProvider from "../../providers/ProfileProvider";
 import AnimateOutlet from "../common/AnimateOutlet";
+import BackToTopButton from "../common/BackToTop";
 
 function Layout() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function Layout() {
             <AnimateOutlet key={location.pathname} />
           </AnimatePresence>
           <Modal />
+          <BackToTopButton />
           <Footer />
           <ReactQueryDevtools />
           <ScrollRestoration />

@@ -11,6 +11,7 @@ function BlogCard({ blog }) {
   return (
     <div className="blog-card">
       <img
+        data-load
         className="blog-thumb w-96"
         src={`${import.meta.env.VITE_API_ENDPOINT}/uploads/blog/${thumbnail}`}
         alt={title}
@@ -33,6 +34,7 @@ function BlogCard({ blog }) {
               {author?.avatar ? (
                 <div className="w-full h-full overflow-hidden rounded-full">
                   <img
+                    data-load
                     className="object-cover w-full h-full"
                     src={`${import.meta.env.VITE_API_ENDPOINT}/uploads/avatar/${
                       author.avatar
