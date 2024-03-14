@@ -60,7 +60,7 @@ function Write() {
         <div className="container">
           {isError && (
             <div className="text-center text-red-400 capitalize">
-              {error?.response?.data?.message ||
+              {error?.response?.data?.error ||
                 error?.message ||
                 "There was an error while adding blog"}
             </div>
